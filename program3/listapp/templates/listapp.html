@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Unordered List of Fruits</h2>
+    <ul>
+        {% for f in fruits %}
+        <li>{{f}}</li>
+        {% endfor %}
+    </ul>
+    <h2>Ordered List of Selected Students (Names starting with J)</h2>
+    <ol>
+        {% for s in stdn %}
+        <li>{{s}}</li>
+        {% endfor %}
+    </ol>
+</body>
+</html>
