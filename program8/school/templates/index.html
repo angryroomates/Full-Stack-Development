@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to the School App</h1>
+    <p>Number of Students: {{ num_students }}</p>
+    <p>Number of Courses: {{ num_courses }}</p>
+
+    <h2>Navigation</h2>
+    <ul>
+        <li><a href="{% url 'student_list' %}">View Students</a></li>
+        <li><a href="{% url 'course_list' %}">View Courses</a></li>
+    </ul>
+</body>
+</html>
