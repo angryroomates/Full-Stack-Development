@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="color:blue;">Courses</h1>
+    <ol>
+        {% for c in courses %}
+        <h1 style="color:red;">
+            <li><a href="{% url 'course_details' c.id %}" style="color:aqua;">{{c.course_name}}</a></li>
+        </h1>
+        {% endfor %}
+    </ol>
+</body>
+</html>

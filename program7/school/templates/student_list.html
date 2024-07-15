@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student List</title>
+</head>
+<body>
+    <h1>Student List</h1>
+    <ul>
+        {% for s in students %}
+        <li>
+            {{s.fname}} {{s.lname}} - {{s.email}}
+            <ul>
+                {% if s.project %}
+                <li>Project Topic: {{s.project.topic}}</li>
+                <li>Languages used: {{s.project.languages_used}}</li>
+                <li>Duration: {{s.project.duration}}</li>
+                {% else %}
+                <li>No Project assigned</li>
+                {% endif %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
