@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register Student for {{ course.course_name }}</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#studentForm').submit(function(event) {
+                event.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: '',
+                    data: {
+                        'fname': $('#fname').val(),
+                        'lname': $('#lname').val(),
+                        'email': $('#email').val(),
+                        'joining_date': $('#joining_date').val(),
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            $('#studentList').append('<li>' + response.student.fname + ' ' + response.student.lname + '</li>');
+                            $('#message').html('<p style="color:green;">Student registered successfully!</p>');
+                            $('#fname').val('');
+                            $('#lname').val('');
+                            $('#email').val('');
+                            $('#joining_date').val('');
+                        } else {
+                            $('#message').html('<p style="color:red;">' + response.error + '</p>');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Register Student for {{ course.course_name }}</h1>
+    <div id="message"></div>
+    <form id="studentForm" method="post">
+        {% csrf_token %}
+        <label for="fname">First Name:</label><br>
+        <input type="text" id="fname" name="fname"><br>
+        <label for="lname">Last Name:</label><br>
+        <input type="text" id="lname" name="lname"><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="joining_date">Joining Date:</label><br>
+        <input type="date" id="joining_date" name="joining_date"><br><br>
+        <input type="submit" value="Register">
+    </form>
+    <h2>Students Enrolled</h2>
+    <ul id="studentList">
+        {% for student in course.students.all %}
+            <li>{{ student.fname }} {{ student.lname }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'course_details' course.id %}">Back to Course Details</a>
+</body>
+</html>
