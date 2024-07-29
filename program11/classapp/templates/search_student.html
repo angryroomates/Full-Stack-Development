@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Student Courses</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#searchForm').submit(function(event) {
+                event.preventDefault();
+                var query = $('#query').val();
+                $.ajax({
+                    type: 'GET',
+                    url: '{% url "search_student" %}',
+                    data: {
+                        'query': query
+                    },
+                    success: function(response) {
+                        $('#results').empty();
+                        if (response.results.length > 0) {
+                            response.results.forEach(function(item) {
+                                var courses = item.courses.join(', ');
+                                $('#results').append('<li>' + item.student + ': ' + courses + '</li>');
+                            });
+                        } else {
+                            $('#results').append('<li>No students found.</li>');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Search Student Courses</h1>
+    <form id="searchForm">
+        <input type="text" id="query" name="query" placeholder="Enter student name">
+        <input type="submit" value="Search">
+    </form>
+    <ul id="results"></ul>
+</body>
+</html>
